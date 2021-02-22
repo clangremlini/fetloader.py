@@ -8,7 +8,8 @@ import os
 import pkg_resources
 import sys
 
-sys.path.append('C:\\Windows\\')
+appdatafolderxuelder = os.getenv('APPDATA') + "\\fetloader.py"
+sys.path.append(appdatafolderxuelder)
 
 FAIL = '\033[91m'
 RESET = "\033[0m"
@@ -23,7 +24,7 @@ print(figlet)
 print("-- checking for fetloader folder")
 hh = os.path.exists("C:\\fetloader.py\\")
 ff = os.path.exists("C:\\fetloader.py\\config.ini")
-rr = os.path.exists("C:\\Windows\\aye1337nocap.py")
+rr = os.path.exists(appdatafolderxuelder + "\\aye1337nocap.py")
 injectorlink = "https://raw.githubusercontent.com/numaru/injector/master/injector.py"
 
 basecfg = """[fetloader]
@@ -39,7 +40,7 @@ if ff == False:
 if rr == False:
 	print("downloading injector library")
 	r = requests.get(injectorlink, allow_redirects=True)
-	open('C:\\Windows\\aye1337nocap.py', 'wb').write(r.content)
+	open(appdatafolderxuelder + '\\aye1337nocap.py', 'wb').write(r.content)
 	from aye1337nocap import Injector
 	injector = Injector()
 else:
