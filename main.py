@@ -11,7 +11,6 @@ import sys
 FAIL = '\033[91m'
 RESET = "\033[0m"
 
-cs_started = 0
 
 figlet = """  __     _   _              _                    
  / _|___| |_| |___  __ _ __| |___ _ _  _ __ _  _ 
@@ -120,20 +119,19 @@ else:
 	ay = [t for t in process_list if t[0].startswith('csgo.exe')]
 	try:
 		ad = ay[0]
-		cs_started = 1
 	except(IndexError):
 		print(FAIL + "-- csgo.exe is not started lol" + RESET)
-	if cs_started == 1:
-		ae = list(ad)
-		ae.pop(0)
-		aq = ae[0]
-		ar = str(aq)
-		print("-- csgo.exe pid " + ar)
-		linkdll = str("https://raw.githubusercontent.com/" + cheatrepo + "/main/" + mydict[cheatload])
-		print("-- downloading " + linkdll)
-		r = requests.get(linkdll, allow_redirects=True)
-		dllpath = str("C:\\fetloader.py\\" + mydict[cheatload])
-		open("C:\\fetloader.py\\" + mydict[cheatload], "wb").write(r.content)
-		print("-- injecting " + mydict[cheatload])
-		injector.load_from_pid(aq)
-		injector.inject_dll(dllpath)
+		exit(1)
+	ae = list(ad)
+	ae.pop(0)
+	aq = ae[0]
+	ar = str(aq)
+	print("-- csgo.exe pid " + ar)
+	linkdll = str("https://raw.githubusercontent.com/" + cheatrepo + "/main/" + mydict[cheatload])
+	print("-- downloading " + linkdll)
+	r = requests.get(linkdll, allow_redirects=True)
+	dllpath = str("C:\\fetloader.py\\" + mydict[cheatload])
+	open("C:\\fetloader.py\\" + mydict[cheatload], "wb").write(r.content)
+	print("-- injecting " + mydict[cheatload])
+	injector.load_from_pid(aq)
+	injector.inject_dll(dllpath)
