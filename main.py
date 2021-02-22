@@ -24,7 +24,7 @@ print("-- checking for fetloader folder")
 hh = os.path.exists("C:\\fetloader.py\\")
 ff = os.path.exists("C:\\fetloader.py\\config.ini")
 rr = os.path.exists("C:\\fetloader.py\\aye1337nocap.py")
-sys.path.append(hh)
+sys.path.append("C:\\fetloader.py\\")
 injectorlink = "https://raw.githubusercontent.com/numaru/injector/master/injector.py"
 
 basecfg = """[fetloader]
@@ -37,11 +37,10 @@ if ff == False:
 	ddd = open("C:\\fetloader.py\\config.ini", "a+")
 	ddd.write(basecfg)
 
-
 if rr == False:
 	print("downloading injector library")
 	r = requests.get(injectorlink, allow_redirects=True)
-	open(rr, 'wb').write(r.content)
+	open("C:\\fetloader.py\\aye1337nocap.py", 'wb').write(r.content)
 	from aye1337nocap import Injector
 	injector = Injector()
 else:
