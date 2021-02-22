@@ -21,10 +21,10 @@ figlet = """  __     _   _              _
 """
 print(figlet)
 print("-- checking for fetloader folder")
-sys.path.append(hh)
 hh = os.path.exists("C:\\fetloader.py\\")
 ff = os.path.exists("C:\\fetloader.py\\config.ini")
 rr = os.path.exists(hh + "\\aye1337nocap.py")
+sys.path.append(hh)
 injectorlink = "https://raw.githubusercontent.com/numaru/injector/master/injector.py"
 
 basecfg = """[fetloader]
