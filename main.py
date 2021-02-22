@@ -8,9 +8,6 @@ import os
 import pkg_resources
 import sys
 
-appdatafolderxuelder = os.getenv('APPDATA') + "\\fetloader.py"
-sys.path.append(appdatafolderxuelder)
-
 FAIL = '\033[91m'
 RESET = "\033[0m"
 
@@ -24,10 +21,10 @@ figlet = """  __     _   _              _
 """
 print(figlet)
 print("-- checking for fetloader folder")
+sys.path.append(hh)
 hh = os.path.exists("C:\\fetloader.py\\")
 ff = os.path.exists("C:\\fetloader.py\\config.ini")
-bb = os.path.exists(appdatafolderxuelder)
-rr = os.path.exists(appdatafolderxuelder + "\\aye1337nocap.py")
+rr = os.path.exists(hh + "\\aye1337nocap.py")
 injectorlink = "https://raw.githubusercontent.com/numaru/injector/master/injector.py"
 
 basecfg = """[fetloader]
@@ -35,9 +32,6 @@ cheatrepo = clangremlini/fetloader-dll-repo"""
 
 if hh == False:
 	os.system("mkdir C:\\fetloader.py\\")
-
-if bb == False:
-	os.system("mkdir " + appdatafolderxuelder)
 
 if ff == False:
 	ddd = open("C:\\fetloader.py\\config.ini", "a+")
@@ -47,7 +41,7 @@ if ff == False:
 if rr == False:
 	print("downloading injector library")
 	r = requests.get(injectorlink, allow_redirects=True)
-	open(appdatafolderxuelder + '\\aye1337nocap.py', 'wb').write(r.content)
+	open(rr, 'wb').write(r.content)
 	from aye1337nocap import Injector
 	injector = Injector()
 else:
