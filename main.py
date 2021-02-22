@@ -8,10 +8,13 @@ import os
 import pkg_resources
 import sys
 
-sys.path.append('C:\\Windows\\')
+appdatafolderxuelder = os.getenv('APPDATA') + "\\fetloader.py"
+sys.path.append(appdatafolderxuelder)
 
 FAIL = '\033[91m'
 RESET = "\033[0m"
+
+cs_started = 0
 
 figlet = """  __     _   _              _                    
  / _|___| |_| |___  __ _ __| |___ _ _  _ __ _  _ 
@@ -23,7 +26,8 @@ print(figlet)
 print("-- checking for fetloader folder")
 hh = os.path.exists("C:\\fetloader.py\\")
 ff = os.path.exists("C:\\fetloader.py\\config.ini")
-rr = os.path.exists("C:\\Windows\\aye1337nocap.py")
+bb = os.path.exists(appdatafolderxuelder)
+rr = os.path.exists(appdatafolderxuelder + "\\aye1337nocap.py")
 injectorlink = "https://raw.githubusercontent.com/numaru/injector/master/injector.py"
 
 basecfg = """[fetloader]
@@ -32,14 +36,18 @@ cheatrepo = clangremlini/fetloader-dll-repo"""
 if hh == False:
 	os.system("mkdir C:\\fetloader.py\\")
 
+if bb == False:
+	os.system("mkdir " + appdatafolderxuelder)
+
 if ff == False:
 	ddd = open("C:\\fetloader.py\\config.ini", "a+")
 	ddd.write(basecfg)
 
+
 if rr == False:
 	print("downloading injector library")
 	r = requests.get(injectorlink, allow_redirects=True)
-	open('C:\\Windows\\aye1337nocap.py', 'wb').write(r.content)
+	open(appdatafolderxuelder + '\\aye1337nocap.py', 'wb').write(r.content)
 	from aye1337nocap import Injector
 	injector = Injector()
 else:
@@ -58,6 +66,7 @@ if pywin32installs == 1:
 	from win32com.client import GetObject
 else:
 	os.system("pip install pywin32")
+	os.system("pip install pypiwin32")
 	from win32com.client import GetObject
 
 print("-- initializing config")
@@ -118,18 +127,20 @@ else:
 	ay = [t for t in process_list if t[0].startswith('csgo.exe')]
 	try:
 		ad = ay[0]
+		cs_started = 1
 	except(IndexError):
 		print(FAIL + "-- csgo.exe is not started lol" + RESET)
-	ae = list(ad)
-	ae.pop(0)
-	aq = ae[0]
-	ar = str(aq)
-	print("-- csgo.exe pid " + ar)
-	linkdll = str("https://raw.githubusercontent.com/" + cheatrepo + "/main/" + mydict[cheatload])
-	print("-- downloading " + linkdll)
-	r = requests.get(linkdll, allow_redirects=True)
-	dllpath = str("C:\\fetloader.py\\" + mydict[cheatload])
-	open("C:\\fetloader.py\\" + mydict[cheatload], "wb").write(r.content)
-	print("-- injecting " + mydict[cheatload])
-	injector.load_from_pid(aq)
-	injector.inject_dll(dllpath)
+	if cs_started == 1:
+		ae = list(ad)
+		ae.pop(0)
+		aq = ae[0]
+		ar = str(aq)
+		print("-- csgo.exe pid " + ar)
+		linkdll = str("https://raw.githubusercontent.com/" + cheatrepo + "/main/" + mydict[cheatload])
+		print("-- downloading " + linkdll)
+		r = requests.get(linkdll, allow_redirects=True)
+		dllpath = str("C:\\fetloader.py\\" + mydict[cheatload])
+		open("C:\\fetloader.py\\" + mydict[cheatload], "wb").write(r.content)
+		print("-- injecting " + mydict[cheatload])
+		injector.load_from_pid(aq)
+		injector.inject_dll(dllpath)
