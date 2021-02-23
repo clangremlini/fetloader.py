@@ -16,7 +16,7 @@ figlet = """  __     _   _              _
  / _|___| |_| |___  __ _ __| |___ _ _  _ __ _  _ 
 |  _/ -_)  _| / _ \\/ _` / _` / -_) '_|| '_ \\ || |
 |_| \\___|\\__|_\\___/\\__,_\\__,_\\___|_|(_) .__/\\_, |
-  b0 - codename awkward                |_|   |__/ 
+  b1 - codename worst                  |_|   |__/ 
 """
 print(figlet)
 print("-- checking for fetloader folder")
