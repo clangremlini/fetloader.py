@@ -8,10 +8,9 @@ import os
 import pkg_resources
 import sys
 
-sys.path.append('C:\\Windows\\')
-
 FAIL = '\033[91m'
 RESET = "\033[0m"
+
 
 figlet = """  __     _   _              _                    
  / _|___| |_| |___  __ _ __| |___ _ _  _ __ _  _ 
@@ -23,7 +22,8 @@ print(figlet)
 print("-- checking for fetloader folder")
 hh = os.path.exists("C:\\fetloader.py\\")
 ff = os.path.exists("C:\\fetloader.py\\config.ini")
-rr = os.path.exists("C:\\Windows\\aye1337nocap.py")
+rr = os.path.exists("C:\\fetloader.py\\aye1337nocap.py")
+sys.path.append("C:\\fetloader.py\\")
 injectorlink = "https://raw.githubusercontent.com/numaru/injector/master/injector.py"
 
 basecfg = """[fetloader]
@@ -39,7 +39,7 @@ if ff == False:
 if rr == False:
 	print("downloading injector library")
 	r = requests.get(injectorlink, allow_redirects=True)
-	open('C:\\Windows\\aye1337nocap.py', 'wb').write(r.content)
+	open("C:\\fetloader.py\\aye1337nocap.py", 'wb').write(r.content)
 	from aye1337nocap import Injector
 	injector = Injector()
 else:
@@ -58,6 +58,7 @@ if pywin32installs == 1:
 	from win32com.client import GetObject
 else:
 	os.system("pip install pywin32")
+	os.system("pip install pypiwin32")
 	from win32com.client import GetObject
 
 print("-- initializing config")
@@ -120,6 +121,7 @@ else:
 		ad = ay[0]
 	except(IndexError):
 		print(FAIL + "-- csgo.exe is not started lol" + RESET)
+		exit(1)
 	ae = list(ad)
 	ae.pop(0)
 	aq = ae[0]
