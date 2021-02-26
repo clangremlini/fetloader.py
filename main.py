@@ -6,6 +6,7 @@ import configparser
 import os
 import pkg_resources
 import sys
+import time
 
 FAIL = '\033[91m'
 RESET = "\033[0m"
