@@ -3,7 +3,6 @@
 
 
 import configparser
-import requests
 import os
 import pkg_resources
 import sys
@@ -16,7 +15,7 @@ figlet = """  __     _   _              _
  / _|___| |_| |___  __ _ __| |___ _ _  _ __ _  _ 
 |  _/ -_)  _| / _ \\/ _` / _` / -_) '_|| '_ \\ || |
 |_| \\___|\\__|_\\___/\\__,_\\__,_\\___|_|(_) .__/\\_, |
-  b1 - codename worst                  |_|   |__/ 
+  b2 - codename bad                    |_|   |__/ 
 """
 print(figlet)
 print("-- checking for fetloader folder")
@@ -25,6 +24,28 @@ ff = os.path.exists("C:\\fetloader.py\\config.ini")
 rr = os.path.exists("C:\\fetloader.py\\aye1337nocap.py")
 sys.path.append("C:\\fetloader.py\\")
 injectorlink = "https://raw.githubusercontent.com/numaru/injector/master/injector.py"
+
+print("-- checking for pywin32")
+installed_packages      = pkg_resources.working_set
+installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
+     for i in installed_packages])
+pkgs = [i.split('==', 1)[0] for i in installed_packages_list]
+pywin32installs = pkgs.count("pywin32")
+
+if pywin32installs == 1:
+	from win32com.client import GetObject
+else:
+	os.system("pip install pywin32")
+	os.system("pip install pypiwin32")
+	from win32com.client import GetObject
+
+print("--- checking for requests")
+requestsinstalls = pkgs.count("requests")
+if requestsinstalls == 1:
+	import requests
+else:
+	os.system("pip install requests")
+	import requests
 
 basecfg = """[fetloader]
 cheatrepo = clangremlini/fetloader-dll-repo"""
@@ -45,21 +66,6 @@ if rr == False:
 else:
 	from aye1337nocap import Injector
 	injector = Injector()
-
-
-print("-- checking for pywin32")
-installed_packages      = pkg_resources.working_set
-installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
-     for i in installed_packages])
-pkgs = [i.split('==', 1)[0] for i in installed_packages_list]
-pywin32installs = pkgs.count("pywin32")
-
-if pywin32installs == 1:
-	from win32com.client import GetObject
-else:
-	os.system("pip install pywin32")
-	os.system("pip install pypiwin32")
-	from win32com.client import GetObject
 
 print("-- initializing config")
 config    = configparser.ConfigParser()
