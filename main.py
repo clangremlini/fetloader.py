@@ -141,3 +141,5 @@ else:
 	print("-- injecting " + mydict[cheatload])
 	injector.load_from_pid(aq)
 	injector.inject_dll(dllpath)
+	print("injected! now you can close this window")
+	time.sleep(5)
