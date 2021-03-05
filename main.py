@@ -17,6 +17,7 @@ figlet = """  __     _   _              _
 |  _/ -_)  _| / _ \\/ _` / _` / -_) '_|| '_ \\ || |
 |_| \\___|\\__|_\\___/\\__,_\\__,_\\___|_|(_) .__/\\_, |
   b2 - codename bad                    |_|   |__/ 
+  hotfix 1
 """
 print(figlet)
 print("-- checking for fetloader folder")
@@ -49,7 +50,8 @@ else:
 	import requests
 
 basecfg = """[fetloader]
-cheatrepo = clangremlini/fetloader-dll-repo"""
+cheatrepo = clangremlini/fetloader-dll-repo
+branch = main"""
 
 if hh == False:
 	os.system("mkdir C:\\fetloader.py\\")
@@ -72,16 +74,29 @@ print("-- initializing config")
 config    = configparser.ConfigParser()
 config.read("C:\\fetloader.py\\config.ini")
 cheatrepo = config['fetloader']['cheatrepo']
+try:
+	cheatbranch = config['fetloader']['branch']
+except(KeyError):
+	basecfg = """[fetloader]
+	cheatrepo = """ + cheatrepo + """
+	branch = main"""
+	os.remove("C:\\fetloader.py\\config.ini")
+	open("C:\\fetloader.py\\config.ini", "w").write(basecfg)
+	cheatbranch = config['fetloader']['branch']
 
 try:
 	os.remove("C:\\fetloader.py\\cheats.ini")
 except(FileNotFoundError):
 	pass
 
-cheatrepolink = "https://raw.githubusercontent.com/" + cheatrepo + "/main/cheats.ini"
+cheatrepolink = "https://raw.githubusercontent.com/" + cheatrepo + "/" + cheatbranch + "/cheats.ini"
 r = requests.get(cheatrepolink, allow_redirects=True)
 open('C:\\fetloader.py\\cheats.ini', 'wb').write(r.content)
 print("-- downloaded cheatlist")
+
+aye = open("C:\\fetloader.py\\cheats.ini").read()
+fet = aye.split("[inject]")[0]
+open("C:\\fetloader.py\\cheats.ini", "w").write(fet)
 
 config.read("C:\\fetloader.py\\cheats.ini")
 cheatsitems = config.items("cheats")
@@ -128,6 +143,7 @@ else:
 		ad = ay[0]
 	except(IndexError):
 		print(FAIL + "-- csgo.exe is not started lol" + RESET)
+		time.sleep(5)
 		exit(1)
 	ae = list(ad)
 	ae.pop(0)
